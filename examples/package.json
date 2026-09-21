@@ -1,0 +1,12 @@
+{
+  "name": "aws-ses-smtp-examples",
+  "version": "1.0.0",
+  "description": "Example scripts for Amazon SES SMTP",
+  "main": "nodejs-nodemailer.js",
+  "scripts": {
+    "send": "node nodejs-nodemailer.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.0"
+  }
+}
