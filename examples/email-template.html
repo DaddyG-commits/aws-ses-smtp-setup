@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email from Amazon SES</title>
+  <style>
+    /* Reset */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100% !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f4f4f5;
+      color: #18181b;
+    }
+
+    .wrapper {
+      width: 100%;
+      background-color: #f4f4f5;
+      padding: 40px 0;
+    }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #ff9900 0%, #ec7211 100%);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .content h2 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #18181b;
+    }
+
+    .content p {
+      margin: 0 0 16px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #3f3f46;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: #ff9900;
+      color: #ffffff !important;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      margin: 24px 0;
+    }
+
+    .footer {
+      padding: 24px 40px;
+      background-color: #fafafa;
+      text-align: center;
+      font-size: 13px;
+      color: #71717a;
+      border-top: 1px solid #e4e4e7;
+    }
+
+    .footer a {
+      color: #ff9900;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>Amazon SES</h1>
+      </div>
+
+      <!-- Body -->
+      <div class="content">
+        <h2>Hello there!</h2>
+        <p>
+          This is a clean, responsive HTML email sent through <strong>Amazon SES SMTP</strong>.
+        </p>
+        <p>
+          You can use this template as a starting point for transactional emails,
+          password resets, notifications, or welcome messages.
+        </p>
+
+        <a href="https://aws.amazon.com/ses/" class="button">Learn more about SES</a>
+
+        <p style="margin-top: 32px; font-size: 14px; color: #71717a;">
+          Sent via Amazon Simple Email Service<br>
+          Fully functional SMTP · High deliverability · Pay only for what you use
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>
+          You’re receiving this because you tested the
+          <a href="https://github.com/DaddyG-commits/aws-ses-smtp-setup">aws-ses-smtp-setup</a> repository.
+        </p>
+        <p style="margin-top: 8px;">
+          © 2026 · Built for developers
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

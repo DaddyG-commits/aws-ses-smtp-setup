@@ -1,6 +1,6 @@
 # AWS SES SMTP Setup Guide
 
-Complete, up-to-date guide (September 2026) to set up a **fully functional Amazon SES SMTP** service, including free-tier guidance.
+Complete, up-to-date guide (September 2026) to set up a **fully functional Amazon SES SMTP** service, including free-tier guidance and **HTML email** support.
 
 ## Can you do it for free?
 
@@ -21,7 +21,7 @@ Always verify the latest on the [official SES Pricing page](https://aws.amazon.c
 3. Verify a domain or email address
 4. Request production access (exit sandbox)
 5. Create SMTP credentials
-6. Test sending
+6. Test sending (including HTML emails)
 
 ## Step-by-Step Setup
 
@@ -83,16 +83,47 @@ New accounts start in **sandbox mode**:
 
 Full list: [AWS General Reference – SES endpoints](https://docs.aws.amazon.com/general/latest/gr/ses.html)
 
-## Example Code
+## HTML Email Support
 
-### Node.js (Nodemailer)
+This repository includes a clean, responsive HTML email template and ready-to-run scripts.
+
+### Files
+- `examples/email-template.html` – Beautiful, mobile-friendly HTML email template
+- `examples/nodejs-html-email.js` – Node.js script that loads the template and sends it
+- `examples/python-html-email.py` – Python equivalent
+
+### Quick test (Node.js)
+```bash
+cd examples
+npm install
+export SES_SMTP_USER=...
+export SES_SMTP_PASS=...
+export SES_FROM=noreply@yourdomain.com
+export SES_TO=you@example.com
+node nodejs-html-email.js
+```
+
+### Quick test (Python)
+```bash
+export SES_SMTP_USER=...
+export SES_SMTP_PASS=...
+export SES_FROM=noreply@yourdomain.com
+export SES_TO=you@example.com
+python examples/python-html-email.py
+```
+
+The template uses inline CSS and table-friendly structure so it renders well across Gmail, Outlook, Apple Mail, etc.
+
+## Example Code (Plain + HTML)
+
+### Node.js (Nodemailer – simple version)
 ```js
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
   host: 'email-smtp.us-east-1.amazonaws.com',
   port: 587,
-  secure: false, // true for 465
+  secure: false,
   auth: {
     user: process.env.SES_SMTP_USER,
     pass: process.env.SES_SMTP_PASS,
@@ -120,13 +151,16 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 
-msg = MIMEMultipart()
+msg = MIMEMultipart('alternative')
 msg['From'] = 'noreply@yourdomain.com'
 msg['To'] = 'recipient@example.com'
 msg['Subject'] = 'Hello from SES'
 
-body = 'This is a test email sent via Amazon SES SMTP.'
-msg.attach(MIMEText(body, 'plain'))
+text = 'This is a test email sent via Amazon SES SMTP.'
+html = '<b>This is a test email sent via Amazon SES SMTP.</b>'
+
+msg.attach(MIMEText(text, 'plain'))
+msg.attach(MIMEText(html, 'html'))
 
 server = smtplib.SMTP('email-smtp.us-east-1.amazonaws.com', 587)
 server.starttls()
@@ -134,11 +168,6 @@ server.login(os.environ['SES_SMTP_USER'], os.environ['SES_SMTP_PASS'])
 server.send_message(msg)
 server.quit()
 print('Email sent successfully')
-```
-
-### cURL (quick test)
-```bash
-# Not recommended for production – just for verification
 ```
 
 ## Best Practices
@@ -149,6 +178,7 @@ print('Email sent successfully')
 - Keep bounce + complaint rates very low (< 5% and < 0.1% ideally)
 - Never buy email lists – only send to people who opted in
 - Consider **Virtual Deliverability Manager** once you scale
+- For HTML emails: keep CSS inline, avoid heavy JavaScript, and always provide a plain-text fallback
 
 ## Cost Control
 
@@ -160,8 +190,12 @@ print('Email sent successfully')
 ## Repository Contents
 
 - `README.md` – this guide
-- `examples/` – ready-to-run code samples
-- `scripts/` – helper scripts (if any)
+- `examples/email-template.html` – responsive HTML email template
+- `examples/nodejs-html-email.js` – send the HTML template (Node)
+- `examples/python-html-email.py` – send the HTML template (Python)
+- `examples/nodejs-nodemailer.js` – simple Node example
+- `examples/python-smtplib.py` – simple Python example
+- `.env.example` – environment variable template
 
 ## Disclaimer
 
